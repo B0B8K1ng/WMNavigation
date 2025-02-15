@@ -1,0 +1,7 @@
+.idea/
+__pycache__/
+data/
+logs/
+.vscode/
+wandb/
+src/VLMnav.egg-info/

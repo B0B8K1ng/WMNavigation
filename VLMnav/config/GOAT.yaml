@@ -1,0 +1,50 @@
+task: GOAT
+agent_cls: GOATAgent
+env_cls: GOATEnv
+
+agent_cfg:
+  navigability_mode: 'depth_sensor' # one of ['none' (ours w/o nav), 'depth_estimate' (ZoeDepth), 'segmentation' (Segformer), 'depth_sensor' (Ours)]
+  project: true # to run the w/o proj baseline
+  pivot: false
+  context_history: 0 
+  explore_bias: 4 
+  max_action_dist: 1.7
+  min_action_dist: 0.5
+  clip_frac: 0.66 # clip action distance to avoid getting too close to obstacles
+  stopping_action_dist: 1.5 # length of actions after the agent calls stop
+  default_action: 0.2 # How far forward to move if the VLM's chosen action is invalid
+  spacing_ratio: 360 # Ratio of FOV to theta_delta
+  num_theta: 60 # Number of angles to consider as actions
+  image_edge_threshold: 0.04 # Dont project actions if they are within 4% of the image edge
+  turn_around_cooldown: 3 # Steps before the agent can turn around again
+  navigability_height_threshold: 0.2 # Threshold from the ground to consider when checking navigability
+  map_scale: 100 #pixels per meter
+  vlm_cfg:
+    model_cls: GeminiVLM
+    model_kwargs:
+      model: gemini-1.5-flash-001
+
+sim_cfg:
+  agent_height: 1.5
+  agent_radius: 0.17
+  allow_slide: true
+  use_goal_image_agent: true
+  goal_image_agent_fov: 100
+  sensor_cfg:
+    height: 1.5
+    res_factor: 1
+    fov: 131
+    pitch: -0.45
+
+env_cfg:
+  num_episodes: 1
+  max_steps: 10000
+  max_steps_per_subgoal: 30
+  log_freq: 1
+  split: val_unseen
+  success_threshold: 0.25
+  instances: 1 # Partitions the dataset into this many instances
+  instance: 0 # Run on this particular partition of the dataset
+  parallel: false
+  name: default
+  port: 5000 # port for the flask server to aggreagte results from instances

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/GroundingDINO" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/VLMnav" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/thirdparty/GroundingDINO" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/thirdparty/segment-anything" vcs="Git" />
+  </component>
+</project>
