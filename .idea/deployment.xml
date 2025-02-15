@@ -1,36 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" promptOnRemoteOverwrite="CHECK_CONTENT" serverName="L20" confirmBeforeUploading="false" autoUploadExternalChanges="true" notifyRemoteChanges="true">
+  <component name="PublishConfigData" autoUpload="Always" promptOnRemoteOverwrite="CHECK_CONTENT" serverName="L20" confirmBeforeUploading="false" confirmBeforeDeletion="false" autoUploadExternalChanges="true" notifyRemoteChanges="true">
+    <option name="confirmBeforeDeletion" value="false" />
     <option name="confirmBeforeUploading" value="false" />
     <serverData>
-      <paths name="3090">
-        <serverdata>
-          <mappings>
-            <mapping deploy="/mnt/nas/algorithm/dujun.nie/code/DispNavigation" local="$PROJECT_DIR$" />
-          </mappings>
-        </serverdata>
-      </paths>
-      <paths name="3090 (1)">
-        <serverdata>
-          <mappings>
-            <mapping deploy="/mnt/nas/algorithm/dujun.nie/code/DispNavigation" local="$PROJECT_DIR$" />
-          </mappings>
-        </serverdata>
-      </paths>
-      <paths name="3090 (2)">
-        <serverdata>
-          <mappings>
-            <mapping deploy="/mnt/nas/algorithm/dujun.nie/code/DispNavigation" local="$PROJECT_DIR$" />
-          </mappings>
-        </serverdata>
-      </paths>
-      <paths name="3090 (3)">
-        <serverdata>
-          <mappings>
-            <mapping deploy="/mnt/nas/algorithm/dujun.nie/code/DispNavigation" local="$PROJECT_DIR$" />
-          </mappings>
-        </serverdata>
-      </paths>
       <paths name="3090 (project level)">
         <serverdata>
           <mappings>
@@ -38,7 +11,7 @@
           </mappings>
         </serverdata>
       </paths>
-      <paths name="3090_rl">
+      <paths name="A800">
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />
@@ -56,6 +29,13 @@
         <serverdata>
           <mappings>
             <mapping deploy="/file_system/vepfs/algorithm/dujun.nie/code/WMNav" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="L20 (project level)">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>
