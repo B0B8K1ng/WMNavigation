@@ -64,6 +64,9 @@ class SimWrapper:
 
         try:
             self.sim = habitat_sim.Simulator(self.sim_cfg)
+            if cfg['dataset'] == 'hssd':
+                self.sim.pathfinder.load_nav_mesh(cfg['scene_path'].replace('/stages/', '/navmesh/').replace('.glb', '.scene_instance.navmesh'))
+            #self.sim.pathfinder.load_nav_mesh(navmesh_file)# if hssd, then load navmesh
             logging.info('Simulator initialized!')
         except Exception as e:
             logging.error(f"Error initializing simulator: {e}")

@@ -1,29 +1,29 @@
 #!/bin/bash
 
 # Configuration Variables
-ROOT_DIR="/file_system/vepfs/algorithm/dujun.nie/code/WMNav/VLMnav/"
+ROOT_DIR="/file_system/vepfs/algorithm/dujun.nie/code/WMNav/"
 CONDA_PATH="/file_system/vepfs/algorithm/dujun.nie/miniconda3/etc/profile.d/conda.sh"
-NUM_GPU=8
+NUM_GPU=5
 INSTANCES=50
-NUM_EPISODES_PER_INSTANCE=20
-PART="full"
+NUM_EPISODES_PER_INSTANCE=44
 MAX_STEPS_PER_EPISODE=40
 TASK="ObjectNav"
-CFG="Baseline_v7"
-NAME="baseline_v7_pro"
+DATASET="mp3d"
+CFG="Baseline_v8_mp3d"
+NAME="baseline_v8_flash_2_mp3d_another"
 PROJECT_NAME="WMNav"
 SLEEP_INTERVAL=200
-LOG_FREQ=500
+LOG_FREQ=1
 PORT=2000
-VENV_NAME="nav" # Name of the conda environment
-CMD="python scripts/main.py --config ${CFG} -ms ${MAX_STEPS_PER_EPISODE} -ne ${NUM_EPISODES_PER_INSTANCE} --name ${NAME} --instances ${INSTANCES} --parallel -lf ${LOG_FREQ} --port ${PORT} --part ${PART}"
+VENV_NAME="wmnav" # Name of the conda environment
+CMD="python scripts/main.py --config ${CFG} -ms ${MAX_STEPS_PER_EPISODE} -ne ${NUM_EPISODES_PER_INSTANCE} --name ${NAME} --instances ${INSTANCES} --parallel -lf ${LOG_FREQ} --port ${PORT} --dataset ${DATASET}"
 
 # Tmux Session Names
 SESSION_NAMES=()
 AGGREGATOR_SESSION="aggregator_${NAME}"
 
 # List of GPU IDs to use (1, 2, 4, 5, 6)
-GPU_LIST=(0 1 2 3 4 5 6 7)
+GPU_LIST=(3 4 5 6 7)
 
 # Start Aggregator Session
 tmux new-session -d -s "$AGGREGATOR_SESSION"

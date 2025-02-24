@@ -1,136 +1,64 @@
-def _initialize_experiment(self):
-    """
-    Initializes the experiment by setting up the dataset split, scene configuration, and goals.
-    """
-    self.split = 'val' if 'val' in self.cfg['split'] else 'train'
-    self.sim_cfg[
-        'scene_config'] = "/file_system/vepfs/algorithm/dujun.nie/data/hm3d_v0.2/hm3d_annotated_basis.scene_dataset_config.json"
-
-    self.all_episodes = []
-    self.goals = {}
-    for f in sorted(os.listdir(
-            f'/file_system/vepfs/algorithm/dujun.nie/data/goat_bench/datasets/goat_bench/hm3d/v1/{self.cfg["split"]}/content')):
-        with gzip.open(
-                f'/file_system/vepfs/algorithm/dujun.nie/data/goat_bench/datasets/goat_bench/hm3d/v1/{self.cfg["split"]}/content/{f}',
-                'rt') as gz:
-            js = json.load(gz)
-            hsh = f.split('.')[0]
-            self.goals[hsh] = js['goals']
-            self.all_episodes += js['episodes']
-    self.num_episodes = len(self.all_episodes)
-def _initialize_episode(self, episode_ndx: int):
-    """
-    Initializes the episode for the GOAT task.
-
-    Args:
-        episode_ndx (int): The index of the episode to initialize.
-    """
-    super()._initialize_episode(episode_ndx)
-
-    episode = self.all_episodes[episode_ndx]
-    f, glb = episode['scene_id'].split('/')[-2:]
-    hsh = f[6:]
-    goals = self.goals[hsh]
-    self.sim_cfg['scene_id'] = f[2:5]
-    self.sim_cfg['scene_path'] = f'/file_system/vepfs/algorithm/dujun.nie/data/hm3d_v0.2/{self.split}/{f}/{glb}'
-    self.simWrapper = SimWrapper(self.sim_cfg)
-    self.current_episode = []
-
-    for goal in episode['tasks']:
-        name = goal[0]
-        mode = goal[1]
-        subgoal = {'name': name, 'mode': mode, 'id': goal[2], 'view_points': []}
-        for obj in goals[f'{f[6:]}.basis.glb_{name}']:
-            if mode == 'object':
-                subgoal['view_points'] += [a['agent_state']['position'] for a in obj['view_points']]
-            else:
-                if obj['object_id'] == goal[2]:
-                    subgoal['view_points'] = [a['agent_state']['position'] for a in obj['view_points']]
-                    if mode == 'description':
-                        subgoal['lang_desc'] = obj['lang_desc']
-                    if mode == 'image':
-                        image_ndx = goal[3]
-                        subgoal['image_position'] = obj['image_goals'][image_ndx]['position']
-                        subgoal['image_rotation'] = obj['image_goals'][image_ndx]['rotation']
-
-        self.current_episode.append(subgoal)
-
-    logging.info(f'\nRUNNING EPISODE {episode_ndx}, SCENE: {self.simWrapper.scene_id}')
-    for i, subgoal in enumerate(self.current_episode):
-        logging.info(f'Goal {i}: {subgoal["name"]}, {subgoal["mode"]}')
-
-    self.init_pos = np.array(episode['start_position'])
-    self.simWrapper.set_state(pos=self.init_pos, quat=episode['start_rotation'])
-    self.curr_goal_ndx = 0
-    self.curr_run_name = f"{episode_ndx}_{self.simWrapper.scene_id}"
-    self.last_goal_reset = -1
-    self.path_calculator.requested_ends = np.array(self.current_episode[self.curr_goal_ndx]['view_points'],
-                                                   dtype=np.float32)
-    self.path_calculator.requested_start = self.init_pos
-    self.curr_shortest_path = self.simWrapper.get_path(self.path_calculator)
-
-    obs = self.simWrapper.step(PolarAction.null)
-    return obs
+from openai import OpenAI
+import base64
+import numpy as np
+from PIL import Image
+import io
 
 
-def _step_env(self, obs: dict):
-    """
-    Takes a step in the environment for the GOAT task.
+# 从文件路径读取图片并转换为Base64编码
+def encode_image_from_file(image_path):
+    # 使用PIL库读取图片
+    image = Image.open(image_path)
 
-    Args:
-        obs (dict): The current observation.
+    # 将图片转换为numpy数组（H*W*C格式的RGB数组）
+    image_array = np.array(image)
 
-    Returns:
-        list: The next action to be taken by the agent.
-    """
-    super()._step_env(obs)
+    # 将numpy数组转换回PIL图像
+    image = Image.fromarray(image_array[:, :, :3], mode='RGB')
 
-    goal = self.current_episode[self.curr_goal_ndx]
-    obs['goal'] = goal
-    if goal['mode'] == 'image':
-        position = goal['image_position']
-        rotation = goal['image_rotation']
-        goal_im = self.simWrapper.get_goal_image(position, rotation)
-        put_text_on_image(goal_im, f"GOAL IMAGE: {goal['name']}", bg_color=(255, 255, 255), location='top_center')
-        obs['goal']['goal_image'] = goal_im
+    # 将图像保存到字节流中
+    buffered = io.BytesIO()
+    image.save(buffered, format="PNG")
 
-    agent_state = obs['agent_state']
-    agent_action, metadata = self.agent.step(obs)
-    step_metadata = metadata['step_metadata']
-    logging_data = metadata['logging_data']
-    images = metadata['images']
+    # 将字节流编码为Base64
+    return base64.b64encode(buffered.getvalue()).decode('utf-8')
 
-    metrics = self._calculate_metrics(agent_state, agent_action, self.curr_shortest_path,
-                                      self.last_goal_reset + 1 + self.cfg['max_steps_per_subgoal'])
-    step_metadata.update(metrics)
 
-    if metrics['done']:
-        self.wandb_log_data['task_data'].setdefault('goal_data', []).append({
-            'goal_mode': goal['mode'],
-            'goal_reached': metrics['goal_reached'],
-            'spl': metrics['spl'],
-        })
+# 输入转发API Key
+client = OpenAI(
+    api_key="sk-8Quae3SbmJiVzQxQpOz937STnHLYdGJQiEQwboQMytdwMDfr",
+    base_url="https://aigptapi.com/v1"
+)
 
-        if 'spl' in self.wandb_log_data:
-            del self.wandb_log_data['spl']
-        if 'goal_reached' in self.wandb_log_data:
-            del self.wandb_log_data['goal_reached']
+# 本地图片路径
+image_path = "/file_system/vepfs/algorithm/dujun.nie/1.png"
 
-        if self.curr_goal_ndx + 1 == len(self.current_episode):
-            agent_action = None
-        else:
-            self.agent.reset_goal()
-            self.agent_distance_traveled = 0
-            agent_action = PolarAction.null
-            self.curr_goal_ndx += 1
-            self.last_goal_reset = self.step
-            goal = self.current_episode[self.curr_goal_ndx]
-            self.path_calculator.requested_ends = np.array(goal['view_points'], dtype=np.float32)
-            self.path_calculator.requested_start = obs['agent_state'].position
-            self.curr_shortest_path = self.simWrapper.get_path(self.path_calculator)
+# 从文件路径读取图片并转换为Base64编码
+base64_image = encode_image_from_file(image_path)
 
-            logging.info(f'New goal {goal["mode"]}: {goal["name"]}, GEODESIC: {self.curr_shortest_path}')
+response = client.chat.completions.create(
+    model="gemini-2.0-flash-001",
+    messages=[
+        {
+            "role": "system",
+            "content": "You are a helpful assistant."
+        },
+        {
+            "role": "user",
+            "content": [
+                {"type": "text", "text": "利用图中的刻度线，输出电视机的位置坐标，用<x, y>形式输出，其中x是水平坐标，y是竖直坐标"},
+                {
+                    "type": "image_url",
+                    "image_url": f"data:image/png;base64,{base64_image}",
+                },
+            ],
+        }
+    ],
+    max_tokens=500,
+    temperature=0,
+    top_p=1,
+    stream=False  # 是否开启流式输出
+)
 
-    self._log(images, step_metadata, logging_data)
-
-    return agent_action
+# 非流式输出获取结果
+print(response.choices[0].message.content)

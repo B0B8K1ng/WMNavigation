@@ -1,6 +1,6 @@
 task: ObjectNav
-agent_cls: BASEV8Agent
-env_cls: BASEV8Env
+agent_cls: WNAgentV1
+env_cls: WNEnvV1
 
 agent_cfg:
   navigability_mode: 'depth_sensor' # one of ['none' (ours w/o nav), 'depth_estimate' (ZoeDepth), 'segmentation' (Segformer), 'depth_sensor' (Ours)]

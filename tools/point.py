@@ -62,11 +62,11 @@ def add_star_to_image(image_path, relative_position, star_size, star_color, outp
 
 
 # 使用示例
-image_path = "/file_system/vepfs/algorithm/dujun.nie/code/WMNav/VLMnav/logs/ObjectNav_version_7_pro_improve_reset/4_of_50/83_890/step0/color_sensor.png"  # 输入图片路径
-relative_position = [0.46875, 0.46296296]  # 五角星的相对位置，例如图片中央
-star_size = 50  # 五角星的大小
+image_path = "/file_system/vepfs/algorithm/dujun.nie/1.png"  # 输入图片路径
+relative_position = [0.2, 0.1]  # 五角星的相对位置，例如图片中央
+star_size = 10  # 五角星的大小
 star_color = 'red'  # 五角星的颜色
-output_path = '/file_system/vepfs/algorithm/dujun.nie/output_image.jpg'  # 输出图片路径
+output_path = '/file_system/vepfs/algorithm/dujun.nie/3.jpg'  # 输出图片路径
 
 # 在图片上添加五角星
 add_star_to_image(image_path, relative_position, star_size, star_color, output_path)

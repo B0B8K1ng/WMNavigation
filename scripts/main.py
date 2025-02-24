@@ -2,9 +2,12 @@ import argparse
 import yaml
 
 from dotenv import load_dotenv
-from agent import *
-from vlm import *
-from env import *
+# from agent import *
+# from env import *
+from WMNav_vlm import *
+# from vlm import *
+from WMNav_agent import *
+from WMNav_env import *
 
 load_dotenv()
 def set_seed(seed: int):
@@ -25,7 +28,7 @@ def main():
     parser.add_argument('--instances', type=int, help='Number of instances for parallel execution (optional)')
     parser.add_argument('--instance', type=int, help='Instance number for parallel execution (optional)')
     parser.add_argument('--port', type=int, help='port number for Flask server parallel execution (optional)')
-    parser.add_argument('--part', type=str, default='test', help='Up 500 or  Down 500 or test')
+    parser.add_argument('--dataset', type=str, default='hssd', help='Type of dataset')
 
     args = parser.parse_args()
 
@@ -49,9 +52,8 @@ def main():
         config['env_cfg']['port'] = args.port
     if args.parallel:
         config['env_cfg']['parallel'] = True
-    if args.part is not None:
-        config['env_cfg']['part'] = args.part
-
+    if args.dataset:
+        config['sim_cfg']['dataset'] = args.dataset
     env_cls = globals()[config['env_cls']]
     env = env_cls(cfg=config)
     env.run_experiment()

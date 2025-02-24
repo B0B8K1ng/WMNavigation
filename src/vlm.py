@@ -8,9 +8,9 @@ import cv2
 from PIL import Image
 from transformers import AutoImageProcessor, Mask2FormerForUniversalSegmentation, pipeline
 
-os.environ['http_proxy'] = 'http://127.0.0.1:7890'
-os.environ['https_proxy'] = 'http://127.0.0.1:7890'
-os.environ['all_proxy'] = 'socks5://127.0.0.1:7890'
+# os.environ['http_proxy'] = 'http://127.0.0.1:7890'
+# os.environ['https_proxy'] = 'http://127.0.0.1:7890'
+# os.environ['all_proxy'] = 'socks5://127.0.0.1:7890'
 
 class VLM:
     """
@@ -99,8 +99,15 @@ class GeminiVLM(VLM):
         }
 
         self.spend = 0
-        self.cost_per_input_token = 0.075 / 1_000_000 if 'flash' in self.name else 1.25 / 1_000_000
-        self.cost_per_output_token = 0.3 / 1_000_000 if 'flash' in self.name else 5 / 1_000_000
+        if '1.5-flash' in self.name:
+            self.cost_per_input_token = 0.075 / 1_000_000
+            self.cost_per_output_token = 0.3 / 1_000_000
+        elif '1.5-pro' in self.name:
+            self.cost_per_input_token = 1.25 / 1_000_000
+            self.cost_per_output_token = 5 / 1_000_000
+        else:
+            self.cost_per_input_token = 0.1 / 1_000_000
+            self.cost_per_output_token = 0.4 / 1_000_000
         
         # Initialize Gemini model and chat session
         self.model = genai.GenerativeModel(
