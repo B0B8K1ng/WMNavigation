@@ -22,7 +22,7 @@ agent_cfg:
   vlm_cfg:
     model_cls: GeminiVLM
     model_kwargs:
-      model: gemini-2.0-flash
+      model: gemini-1.5-pro-001
   panoramic_padding: False
 
 sim_cfg:

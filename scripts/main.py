@@ -2,12 +2,12 @@ import argparse
 import yaml
 
 from dotenv import load_dotenv
-# from agent import *
-# from env import *
+from agent import *
+from env import *
 from WMNav_vlm import *
 # from vlm import *
-from WMNav_agent import *
-from WMNav_env import *
+# from WMNav_agent import *
+# from WMNav_env import *
 
 load_dotenv()
 def set_seed(seed: int):

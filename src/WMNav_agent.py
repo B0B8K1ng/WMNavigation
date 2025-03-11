@@ -2123,17 +2123,19 @@ class WNAgentV2(VLMNavAgent):
                 f"(3){subtask}. This is the subtask of the previous step and the expected goal to be achieved. "
                 f'Your job is to describe in detail the next three steps to take and predict the possible outcome of each step. '
                 f'To help you reach the {goal} as quickly as possible, I can give you some human suggestions: '
-                f'(1) If the {goal} appears in the image, directly choose the target as the next step in the plan. Note a chair must have a backrest and a chair is not a stool. Note a chair is NOT sofa(couch) which is NOT a bed. '
-                f'(2) If the {goal} is not found and the previous subtask {subtask} has not completed, continue to complete the last subtask {subtask} that has not been completed. Note you need to pay special attention to open doors and hallways, as they can lead to other unseen rooms. Note GOING UP OR DOWN STAIRS is an option. '
-                "Format your answer in the json {{'Flag': <Whether the target is in your view, True or False>, 'First': <First step description and possible outcome>, 'Second': <Second step description and possible outcome>, 'Third': <Third step description and possible outcome>}}. ")
+                f'(1) If the {goal} appears in the image and can be approached directly, then choose the target as the next step in the plan. Note a chair must have a backrest and a chair is not a stool. Note a chair is NOT sofa(couch) which is NOT a bed. '
+                f'(2) If the {goal} appears in the image but is blocked by an obstacle in between, then plan the next three steps to reach the {goal}. '
+                f'(3) Note you need to pay special attention to open doors and hallways, as they can lead to other unseen rooms. Note GOING UP OR DOWN STAIRS is an option. Note you can not open the door. '
+                "Format your answer in the json {{'Flag': <Whether the target is in your view and can be approached directly, True or False>, 'First': <First step description and possible outcome>, 'Second': <Second step description and possible outcome>, 'Third': <Third step description and possible outcome>}}. ")
             else:
                 planning_prompt = (f"The agent has been tasked with navigating to a {goal.upper()}. The agent has sent you an image taken from its current location. "
                 f'Your job is to describe in detail the next three steps to take and predict the possible outcome of each step. '
                 f'To help you reach the {goal} as quickly as possible, I can give you some human suggestions: '
                 f'(1) If the {goal} appears in the image, directly choose the target as the next step in the plan. Note a chair must have a backrest and a chair is not a stool. Note a chair is NOT sofa(couch) which is NOT a bed. '
-                f'(2) Note you need to pay special attention to open doors and hallways, as they can lead to other unseen rooms. Note GOING UP OR DOWN STAIRS is an option. '
-                "Format your answer in the json {{'Flag': <Whether the target is in your view, True or False>, 'First': <First step description and possible outcome>, 'Second': <Second step description and possible outcome>, 'Third': <Third step description and possible outcome>}}. ")
+                f'(2) Note you need to pay special attention to open doors and hallways, as they can lead to other unseen rooms. Note GOING UP OR DOWN STAIRS is an option. Note you can not open the door. '
+                "Format your answer in the json {{'Flag': <Whether the target is in your view and can be approached directly, True or False>, 'First': <First step description and possible outcome>, 'Second': <Second step description and possible outcome>, 'Third': <Third step description and possible outcome>}}. ")
             return planning_prompt
+        #If the {goal} is not found and the previous subtask {subtask} has not been completed, continue to complete the last subtask {subtask} that has not been completed.
         if prompt_type == 'no_project':
             baseline_prompt = (f"TASK: NAVIGATE TO THE NEAREST {goal.upper()} and get as close to it as possible. Use your prior knowledge about where items are typically located within a home. "
                         "You have four possible actions: {0: Turn completely around, 1: Turn left, 2: Move straight ahead, 3: Turn right}. "

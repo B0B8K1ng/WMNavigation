@@ -543,7 +543,7 @@ class WNEnvV2(Env):
 
         super()._step_env(obs)
         obs['goal'] = self.current_episode['object']  # 目标的类别，最短距离，目标位置，所有可到点
-        obs['subtask'] = subtask  # 子目标
+        obs['subtask'] = first_subtask  # 子目标
         obs['goal_flag'] = goal_flag  # 是否发现目标
         agent_state = obs['agent_state']
         self.agent_distance_traveled += np.linalg.norm(agent_state.position - self.prev_agent_position)
@@ -551,7 +551,7 @@ class WNEnvV2(Env):
         agent_action, metadata = self.agent.step(obs)  # 整个模型前向运行一次，返回动作和结果
         step_metadata = metadata['step_metadata']
         metadata['logging_data']['EVALUATOR_RESPONSE'] = str({'goal_rotate':goal_rotate*30, 'explorable_value': explorable_value, 'reason': reason})
-        metadata['logging_data']['PLANNING_RESPONSE'] = str({'goal_flag': goal_flag, 'subtask': subtask})
+        metadata['logging_data']['PLANNING_RESPONSE'] = str({'goal_flag': goal_flag, '1_subtask': first_subtask, '2_subtask': second_subtask, '3_subtask': third_subtask})
         logging_data = metadata['logging_data']
 
         images = metadata['images']

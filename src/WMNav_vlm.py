@@ -8,10 +8,10 @@ import io
 logging.getLogger("openai").setLevel(logging.ERROR)
 logging.getLogger("httpx").setLevel(logging.ERROR)
 
-# API_KEY = "sk-QgHkTacgyuFn64vxPKLoTG2chdmGqpoqutNJwn79bV8JSmhe"
-# BASE_URL = "https://aigptapi.com/v1"
-API_KEY = "sk-BgZNfTb9bhFNYviGBghCkaf8RHQm7v2SGOf1MNi1c9B5lSuu"
-BASE_URL = "https://chataiapi.com/v1"
+API_KEY = "sk-QgHkTacgyuFn64vxPKLoTG2chdmGqpoqutNJwn79bV8JSmhe"
+BASE_URL = "https://aigptapi.com/v1"
+# API_KEY = "sk-BgZNfTb9bhFNYviGBghCkaf8RHQm7v2SGOf1MNi1c9B5lSuu"
+# BASE_URL = "https://chataiapi.com/v1"
 
 
 def encode_image(image):
