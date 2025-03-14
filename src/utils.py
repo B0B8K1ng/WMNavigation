@@ -506,7 +506,7 @@ def create_gif_nav(image_dir, h, w, interval=600):
     import gc
     gc.collect()  # Trigger garbage collection to ensure memory is released
 
-def create_gif_evalue(image_dir, h, w, interval=600):
+def create_gif_cvalue(image_dir, h, w, interval=600):
     """
     Creates a GIF animation from images in the specified directory.
 
@@ -529,7 +529,7 @@ def create_gif_evalue(image_dir, h, w, interval=600):
     # Process up to 80 steps
     for i in range(min(step_num, 80)):
         try:
-            img = cv2.imread(f"{image_dir}/step{i}/evalue_map.png")
+            img = cv2.imread(f"{image_dir}/step{i}/cvalue_map.png")
             img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
             frame = [ax.imshow(img_rgb, animated=True)]
             frames.append(frame)
@@ -549,7 +549,7 @@ def create_gif_evalue(image_dir, h, w, interval=600):
     ani = animation.ArtistAnimation(fig, frames, interval=interval, blit=True)
 
     # Save the animation
-    ani.save(f'{image_dir}/animation_evalue_map.gif', writer='imagemagick')
+    ani.save(f'{image_dir}/animation_cvalue_map.gif', writer='imagemagick')
     logging.info('GIF animation saved successfully!')
 
     # Clear the frames list after saving the animation

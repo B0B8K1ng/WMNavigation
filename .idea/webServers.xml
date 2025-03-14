@@ -12,6 +12,9 @@
       <webServer id="ad3f55d7-3e27-42c5-aac5-e7c19190c128" name="L20 (project level)">
         <fileTransfer accessType="SFTP" host="180.184.47.134" port="19134" sshConfigId="87eaa99e-aa1a-43b4-b1ab-39f33b4d88f9" sshConfig="dujun.nie@180.184.47.134:19134 password" />
       </webServer>
+      <webServer id="a7c034b2-d141-4e41-8fc4-cae940d294ec" name="L20 (project level) (1)">
+        <fileTransfer accessType="SFTP" host="180.184.47.134" port="19134" sshConfigId="62b4e85d-3a5f-414b-9d51-704da84f5508" sshConfig="L20" />
+      </webServer>
     </option>
   </component>
 </project>

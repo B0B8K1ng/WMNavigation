@@ -11,6 +11,34 @@
           </mappings>
         </serverdata>
       </paths>
+      <paths name="A800">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="A800 (1)">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="A800 (2)">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="L20">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/file_system/vepfs/algorithm/dujun.nie/code/WMNav" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="L20 (project level)">
         <serverdata>
           <mappings>

@@ -146,7 +146,7 @@ def create_gif_nav(image_dir, out_dir, h, w, interval=600):
     import gc
     gc.collect()  # Trigger garbage collection to ensure memory is released
 
-def create_gif_evalue(image_dir, out_dir, h, w, interval=600):
+def create_gif_cvalue(image_dir, out_dir, h, w, interval=600):
     """
     Creates a GIF animation from images in the specified directory.
 
@@ -169,17 +169,17 @@ def create_gif_evalue(image_dir, out_dir, h, w, interval=600):
     # Process up to 80 steps
     for i in range(min(step_num, 80)):
         try:
-            img = cv2.imread(f"{image_dir}/step{i}/evalue_map.png")
+            img = cv2.imread(f"{image_dir}/step{i}/cvalue_map.png")
             img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
             frame = [ax.imshow(img_rgb, animated=True)]
             frames.append(frame)
 
-            img = cv2.imread(f"{image_dir}/step{i}/evalue_map.png")
+            img = cv2.imread(f"{image_dir}/step{i}/cvalue_map.png")
             img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
             frame = [ax.imshow(img_rgb, animated=True)]
             frames.append(frame)
 
-            img = cv2.imread(f"{image_dir}/step{i}/evalue_map.png")
+            img = cv2.imread(f"{image_dir}/step{i}/cvalue_map.png")
             img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
             frame = [ax.imshow(img_rgb, animated=True)]
             frames.append(frame)
@@ -199,7 +199,7 @@ def create_gif_evalue(image_dir, out_dir, h, w, interval=600):
     ani = animation.ArtistAnimation(fig, frames, interval=interval, blit=True)
 
     # Save the animation
-    ani.save(f'{out_dir}/animation_evalue_map.gif', writer='imagemagick')
+    ani.save(f'{out_dir}/animation_cvalue_map.gif', writer='imagemagick')
     logging.info('GIF animation saved successfully!')
 
     # Clear the frames list after saving the animation
@@ -314,10 +314,10 @@ def create_gif_text(image_dir, out_dir, h, w, interval=600, font_size=50, paddin
     # Close the figure and free memory
     plt.close(fig)
 
-dir = '/file_system/vepfs/algorithm/dujun.nie/code/WMNav/logs/ObjectNav_baseline_v8_flash_2_mp3d_another/30_of_50/1328_Z6MFQCViBuw/' #552_880 /file_system/vepfs/algorithm/dujun.nie/code/WMNav/logs/ObjectNav_baseline_v8_flash_2_mp3d_another/0_of_50/0_2azQ1b91cZZ/
+dir = '/file_system/vepfs/algorithm/dujun.nie/code/WMNav/logs/ObjectNav_test/0_of_1/0_877/' #552_880 /file_system/vepfs/algorithm/dujun.nie/code/WMNav/logs/ObjectNav_baseline_v8_flash_2_mp3d_another/0_of_50/0_2azQ1b91cZZ/
 # /file_system/vepfs/algorithm/dujun.nie/code/WMNav/logs/ObjectNav_baseline_v8_flash_2_mp3d_another/10_of_50/454_EU6Fwq7SyZv/ /file_system/vepfs/algorithm/dujun.nie/code/WMNav/logs/ObjectNav_baseline_v8_flash_2_mp3d_another/30_of_50/1336_Z6MFQCViBuw/
 out_dir = '/file_system/vepfs/algorithm/dujun.nie/'
 create_gif(dir, out_dir, 480, 640)
 create_gif_nav(dir, out_dir, 1800, 1800)
-create_gif_evalue(dir, out_dir, 1800, 1800)
+create_gif_cvalue(dir, out_dir, 1800, 1800)
 create_gif_text(dir, out_dir, 200, 1500)

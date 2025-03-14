@@ -1,12 +1,10 @@
 task: ObjectNav
-agent_cls: WNAgentV2
-env_cls: WNEnvV2
+agent_cls: WMNavAgent
+env_cls: WMNavEnv
 
 agent_cfg:
   navigability_mode: 'depth_sensor' # one of ['none' (ours w/o nav), 'depth_estimate' (ZoeDepth), 'segmentation' (Segformer), 'depth_sensor' (Ours)]
-  project: true # to run the w/o proj baseline
-  pivot: false
-  context_history: 0 
+  context_history: 0
   explore_bias: 4 
   max_action_dist: 1.7
   min_action_dist: 0.5
@@ -22,7 +20,7 @@ agent_cfg:
   vlm_cfg:
     model_cls: GeminiVLM
     model_kwargs:
-      model: gemini-2.0-flash
+      model: gemini-1.5-pro
   panoramic_padding: False
 
 sim_cfg:
