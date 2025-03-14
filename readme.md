@@ -29,9 +29,9 @@ This repository is the official implementation of WMNav, a novel World Model-bas
 
 ## 📚 Table of Contents
 - [Get Started](#-get-started)
-      - [Installation and Setup](#-installation-and-setup)
-      - [Prepare Dataset](#-prepare-dataset)
-      - [API Key](#-api-key)
+  - [Installation and Setup](#-installation-and-setup)
+  - [Prepare Dataset](#-prepare-dataset)
+  - [API Key](#-api-key)
 - [Demo](#-demo)
 - [Evaluation](#-evaluation)
 - [Customize Experiments](#-customize-experiments)
@@ -56,7 +56,6 @@ This repository is the official implementation of WMNav, a novel World Model-bas
     
     pip install -r requirements.txt
     ```
-
 ### 🛢️ Prepare Dataset
 This project is based on [Habitat simulator](https://aihabitat.org/) and the HM3D and MP3D datasets are available [here](https://github.com/facebookresearch/habitat-sim/blob/main/DATASETS.md).
 Our code requires all above data to be in a data folder in the following format. Move the downloaded HM3D v0.1, HM3D v0.2 and MP3D folders into the following configuration:
@@ -112,7 +111,6 @@ In the logs/ directory, there should be saved gifs:
   <br>
   <img src="imgs/demo.gif" width="900">
 <p>
-
 ## 📊 Evaluation
 To evaluate WMNav at scale (HM3D v0.1 contains 1000 episodes, 2000 episodes for HM3D v0.2 and 2195 episodes for MP3D), we use a framework for parallel evaluation. The file ```parallel.sh``` contains a script to distribute K instances over N GPUs, and for each of them to run M episodes. Note each episode consumes ~320MB of GPU memory. A local flask server is intialized to handle the data aggregation, and then the aggregated results are logged to wandb. Make sure you are logged in with `wandb login`
 
@@ -138,7 +136,6 @@ VENV_NAME="wmnav" # Name of the conda environment
 GPU_LIST=(3 4 5 6 7) # List of GPU IDs to use
 ```
 results are saved in logs/ directory.
-
 ## 🔨️ Customize Experiments
 To run your own configuration, please refer to the [YAML file](config/WMNav.yaml) detailing the configuration variables:
 ```yaml
@@ -166,7 +163,6 @@ This work is built on many amazing research works and open-source projects, than
 - [habitat-lab](https://github.com/facebookresearch/habitat-lab)
 - [habitat-sim](https://github.com/facebookresearch/habitat-sim)
 - [Matterport3D](https://github.com/niessner/Matterport)
-
 ## 📝 Citation
 If you find our work useful in your research, please consider giving a star :star: and citing the following paper :pencil:.
 
@@ -178,7 +174,6 @@ If you find our work useful in your research, please consider giving a star :sta
   year={2025}
 }
 ```
-
 ## 🤗 Contact
 
 For feedback, questions, or press inquiries please contact niedujun2024@ia.ac.cn.
