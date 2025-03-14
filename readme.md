@@ -16,12 +16,18 @@ Dujun Nie<sup>1,*</sup>, Xianda Guo<sup>2,*</sup>, Yiqun Duan<sup>3</sup>, Ruiju
 </div>
 
 <div align="center">
-This repository is the official implementation of WMNav, a novel World Model-based Object Goal Navigation framework powered by Vision-Language Models.
+This repository is the official implementation of WMNav, a novel World Model-based Object Goal Navigation framework powered by Vision-Language Models. 
 </div>
+
 <p align="center">
   <img src="imgs/method.jpg" width="800">
   <p align="center">Overview of our navigation framework</p>  
 </p>
+This project is based on <a href="https://github.com/Jirl-upenn/VLMnav">VLMnav</a>. Our method comprises four Three components:
+
+1. **Novel architecture** - Introducing a new direction for object goal navigation using a world model consisting of VLMs and novel modules.
+2. **Memory strategy** - Designing an innovative memory strategy of predicted environmental states that employs an online Curiosity Value Map to quantitatively store the likelihood of the target's presence in various scenarios predicted by the world model.
+3. **Efficiency** - Proposing a subtask decomposition with feedback and a two-stage action proposer strategy to enhance the reliability of VLM reasoning outcomes and improve exploration efficiency.  
 
 ## 🔥 News
 * **` Mar. 14th, 2025`:** The code of WMNav is available! ☕️
