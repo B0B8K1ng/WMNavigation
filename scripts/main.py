@@ -18,7 +18,7 @@ def set_seed(seed: int):
 def main():
     parser = argparse.ArgumentParser(description="Run a dynamic envmark")
 
-    parser.add_argument('--config', type=str, default='ObjectNav', help='name of the YAML config file')
+    parser.add_argument('--config', type=str, default='WMNav', help='name of the YAML config file')
     parser.add_argument('-n', '--name', type=str, help='Name for the run (optional)')
     parser.add_argument('-lf', '--log_freq', type=int, help='Logging frequency (optional)')
     parser.add_argument('-ms', '--max_steps', type=int, help='Max steps per episode (optional)')

@@ -28,16 +28,16 @@ This repository is the official implementation of WMNav, a novel World Model-bas
 * **` Mar. 4th, 2025`:** We released our paper on [Arxiv](https://arxiv.org/abs/2503.02247).
 
 ## 📚 Table of Contents
-- [Get Started](#get-started)
-  - [Installation and Setup](#installation-and-setup)
-  - [Prepare Dataset](#prepare-dataset)
-  - [API Key](#api-key)
-- [Demo](#demo)
-- [Evaluation](#evaluation)
-- [Customize Experiments](#customize-experiments)
-- [Acknowledgement](#acknowledgement)
-- [Citation](#citation)
-- [Contact](#contact)
+- [Get Started](#-get-started)
+  - [Installation and Setup](#-installation-and-setup)
+  - [Prepare Dataset](#-prepare-dataset)
+  - [API Key](#-api-key)
+- [Demo](#-demo)
+- [Evaluation](#-evaluation)
+- [Customize Experiments](#-customize-experiments)
+- [Acknowledgement](#-acknowledgement)
+- [Citation](#-citation)
+- [Contact](#-contact)
 
 ## 🚀 Get Started
 ### ⚙️ Installation and Setup
@@ -105,7 +105,7 @@ You can also try other VLMs by modifying [```api.py```](src/api.py)(using the Op
 ##  🎮 Demo
 Run the following command to visualize the result of an episode:
 ```
-python scripts/main.py --config WMNav 
+python scripts/main.py
 ```
 In the logs/ directory, there should be saved gifs:
 <p align="center">
@@ -181,4 +181,4 @@ If you find our work useful in your research, please consider giving a star :sta
 
 ## 🤗 Contact
 
-For feedback, questions, or press inquiries please contact [Dujun Nie](niedujun2024@ia.ac.cn).
+For feedback, questions, or press inquiries please contact niedujun2024@ia.ac.cn.
