@@ -41,7 +41,7 @@ This repository is the official implementation of WMNav, a novel World Model-bas
 
 ## 🚀 Get Started
 
-### ⚙️ Installation and Setup
+### ⚙ Installation and Setup
 1. clone this repo.
     ```
     git clone https://github.com/B0B8K1ng/WMNavigation
