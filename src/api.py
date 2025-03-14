@@ -55,8 +55,8 @@ class GeminiVLM:
             self.cost_per_input_token = 1.25 / 1_000_000
             self.cost_per_output_token = 5 / 1_000_000
         else:
-            self.cost_per_input_token = 0.06 / 1_000_000
-            self.cost_per_output_token = 0.25 / 1_000_000
+            self.cost_per_input_token = 0.1 / 1_000_000
+            self.cost_per_output_token = 0.4 / 1_000_000
 
     def call_chat(self, image: list[np.array], text_prompt: str):
         base64_image = encode_image(image[0])
