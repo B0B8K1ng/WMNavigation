@@ -46,6 +46,13 @@
           </mappings>
         </serverdata>
       </paths>
+      <paths name="L20 (project level) (1)">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
     </serverData>
   </component>
 </project>

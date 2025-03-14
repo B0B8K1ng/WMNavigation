@@ -29,9 +29,9 @@ This repository is the official implementation of WMNav, a novel World Model-bas
 
 ## 📚 Table of Contents
 - [Get Started](#-get-started)
-  - [Installation and Setup](#-installation-and-setup)
-  - [Prepare Dataset](#-prepare-dataset)
-  - [API Key](#-api-key)
+  - [Installation and Setup](#installation-and-setup)
+  - [Prepare Dataset](#prepare-dataset)
+  - [API Key](#api-key)
 - [Demo](#-demo)
 - [Evaluation](#-evaluation)
 - [Customize Experiments](#-customize-experiments)
@@ -40,7 +40,7 @@ This repository is the official implementation of WMNav, a novel World Model-bas
 - [Contact](#-contact)
 
 ## 🚀 Get Started
-### ⚙️ Installation and Setup
+#### ⚙️ Installation and Setup
 1. clone this repo.
     ```
     git clone https://github.com/B0B8K1ng/WMNavigation
