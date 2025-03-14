@@ -40,6 +40,7 @@ This repository is the official implementation of WMNav, a novel World Model-bas
 - [Contact](#-contact)
 
 ## 🚀 Get Started
+
 ### ⚙️ Installation and Setup
 1. clone this repo.
     ```
@@ -56,6 +57,7 @@ This repository is the official implementation of WMNav, a novel World Model-bas
     
     pip install -r requirements.txt
     ```
+   
 ### 🛢️ Prepare Dataset
 This project is based on [Habitat simulator](https://aihabitat.org/) and the HM3D and MP3D datasets are available [here](https://github.com/facebookresearch/habitat-sim/blob/main/DATASETS.md).
 Our code requires all above data to be in a data folder in the following format. Move the downloaded HM3D v0.1, HM3D v0.2 and MP3D folders into the following configuration:
@@ -98,9 +100,11 @@ Our code requires all above data to be in a data folder in the following format.
 │  │  │  ├── val.json.gz
 ```
 The variable DATASET_ROOT can be set in [.env file](.env).
+
 ### 🚩 API Key
 To use the Gemini VLMs, paste a base url and api key into the [.env file](.env) for the variable called GEMINI_BASE_URL and GEMINI_API_KEY.
 You can also try other VLMs by modifying [```api.py```](src/api.py)(using the OpenAI libraries)
+
 ##  🎮 Demo
 Run the following command to visualize the result of an episode:
 ```
@@ -111,6 +115,7 @@ In the logs/ directory, there should be saved gifs:
   <br>
   <img src="imgs/demo.gif" width="900">
 <p>
+
 ## 📊 Evaluation
 To evaluate WMNav at scale (HM3D v0.1 contains 1000 episodes, 2000 episodes for HM3D v0.2 and 2195 episodes for MP3D), we use a framework for parallel evaluation. The file ```parallel.sh``` contains a script to distribute K instances over N GPUs, and for each of them to run M episodes. Note each episode consumes ~320MB of GPU memory. A local flask server is intialized to handle the data aggregation, and then the aggregated results are logged to wandb. Make sure you are logged in with `wandb login`
 
@@ -136,6 +141,7 @@ VENV_NAME="wmnav" # Name of the conda environment
 GPU_LIST=(3 4 5 6 7) # List of GPU IDs to use
 ```
 results are saved in logs/ directory.
+
 ## 🔨️ Customize Experiments
 To run your own configuration, please refer to the [YAML file](config/WMNav.yaml) detailing the configuration variables:
 ```yaml
@@ -154,6 +160,7 @@ agent_cfg:
   default_action: 0.2 # how far forward to move if the VLM's chosen action is invalid
 ```
 💡 If you want to the design your own model(achieved by designing our own CustomAgent and CustomEnv) or try ablation experiments detailed in the paper, please refer to the [```cumstom_agent.py```](src/custom_agent.py) and [```custom_env.py```](src/custom_env.py).
+
 ## 🙇 Acknowledgement
 
 This work is built on many amazing research works and open-source projects, thanks a lot to all the authors for sharing!
@@ -163,6 +170,7 @@ This work is built on many amazing research works and open-source projects, than
 - [habitat-lab](https://github.com/facebookresearch/habitat-lab)
 - [habitat-sim](https://github.com/facebookresearch/habitat-sim)
 - [Matterport3D](https://github.com/niessner/Matterport)
+- 
 ## 📝 Citation
 If you find our work useful in your research, please consider giving a star :star: and citing the following paper :pencil:.
 
@@ -174,6 +182,7 @@ If you find our work useful in your research, please consider giving a star :sta
   year={2025}
 }
 ```
+
 ## 🤗 Contact
 
 For feedback, questions, or press inquiries please contact niedujun2024@ia.ac.cn.
