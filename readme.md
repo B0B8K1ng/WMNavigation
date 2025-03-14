@@ -29,9 +29,9 @@ This repository is the official implementation of WMNav, a novel World Model-bas
 
 ## 📚 Table of Contents
 - [Get Started](#-get-started)
-  - [Installation and Setup](#-installation-and-setup)
-  - [Prepare Dataset](#-prepare-dataset)
-  - [API Key](#-api-key)
+      - [Installation and Setup](#-installation-and-setup)
+      - [Prepare Dataset](#-prepare-dataset)
+      - [API Key](#-api-key)
 - [Demo](#-demo)
 - [Evaluation](#-evaluation)
 - [Customize Experiments](#-customize-experiments)
