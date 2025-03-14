@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Configuration Variables
-ROOT_DIR="/file_system/vepfs/algorithm/dujun.nie/code/WMNav/"
-CONDA_PATH="/file_system/vepfs/algorithm/dujun.nie/miniconda3/etc/profile.d/conda.sh"
+ROOT_DIR=YOUR_ROOT
+CONDA_PATH=YOUR_CONDA
 NUM_GPU=5
 INSTANCES=50
 NUM_EPISODES_PER_INSTANCE=44
