@@ -1,16 +1,16 @@
 #!/bin/bash
 
 # Configuration Variables
-ROOT_DIR=YOUR_ROOT
-CONDA_PATH=YOUR_CONDA
+ROOT_DIR=/file_system/vepfs/algorithm/dujun.nie/code/WMNav/
+CONDA_PATH=/file_system/vepfs/algorithm/dujun.nie/miniconda3/etc/profile.d/conda.sh
 NUM_GPU=5
 INSTANCES=50
-NUM_EPISODES_PER_INSTANCE=44
+NUM_EPISODES_PER_INSTANCE=40
 MAX_STEPS_PER_EPISODE=40
 TASK="ObjectNav"
-DATASET="mp3d"
+DATASET="hm3d_v0.1"
 CFG="WMNav"
-NAME="baseline_v8_pro_1_5_mp3d"
+NAME="wmnav-qwen2_5vl-7B-hm3dv1"
 PROJECT_NAME="WMNav"
 VENV_NAME="wmnav" # Name of the conda environment
 GPU_LIST=(3 4 5 6 7) # List of GPU IDs to use

@@ -61,7 +61,7 @@ class Env:
         Args:
             cfg (dict): Configuration dictionary containing logging settings.
         """
-        self.log_file = f'logs/{cfg["task"]}_{self.cfg["name"]}/{self.cfg["instance"]}_of_{self.cfg["instances"]}.txt'
+        self.log_file = os.path.join(os.environ.get("LOG_DIR"), f'{cfg["task"]}_{self.cfg["name"]}/{self.cfg["instance"]}_of_{self.cfg["instances"]}.txt')
         os.makedirs(os.path.dirname(self.log_file), exist_ok=True)
         if self.cfg['parallel']:
             logging.basicConfig(
@@ -169,7 +169,7 @@ class Env:
         Called after the episode is complete, saves the dataframe log, and resets the environment.
         Sends a request to the aggregator server if parallel is set to True.
         """
-        self.df.to_pickle(f'logs/{self.outer_run_name}/{self.inner_run_name}/{self.curr_run_name}/df_results.pkl')
+        self.df.to_pickle(os.path.join(os.environ.get("LOG_DIR"), f'{self.outer_run_name}/{self.inner_run_name}/{self.curr_run_name}/df_results.pkl'))
         self.simWrapper.reset()
         self.agent.reset()
         if self.cfg['parallel']:
@@ -189,10 +189,10 @@ class Env:
         logging.info('\n===================RUN COMPLETE===================\n')
         if self.cfg['log_freq'] == 1:
             create_gif(
-                f'logs/{self.outer_run_name}/{self.inner_run_name}/{self.curr_run_name}', self.agent.cfg['sensor_cfg']['img_height'], self.agent.cfg['sensor_cfg']['img_width'], agent_cls=self.agent_cls
+                os.path.join(os.environ.get("LOG_DIR"), f'{self.outer_run_name}/{self.inner_run_name}/{self.curr_run_name}'), self.agent.cfg['sensor_cfg']['img_height'], self.agent.cfg['sensor_cfg']['img_width'], agent_cls=self.agent_cls
             )
             create_gif_voxel(
-                f'logs/{self.outer_run_name}/{self.inner_run_name}/{self.curr_run_name}',
+                os.path.join(os.environ.get("LOG_DIR"), f'{self.outer_run_name}/{self.inner_run_name}/{self.curr_run_name}'),
                 1800, 1800
             )
 
@@ -208,7 +208,7 @@ class Env:
         self.df = pd.concat([self.df, pd.DataFrame([step_metadata])], ignore_index=True)
 
         if self.step % self.cfg['log_freq'] == 0 or step_metadata['success'] == 0:
-            path = f'logs/{self.outer_run_name}/{self.inner_run_name}/{self.curr_run_name}/step{self.step}'
+            path = os.path.join(os.environ.get("LOG_DIR"), f'{self.outer_run_name}/{self.inner_run_name}/{self.curr_run_name}/step{self.step}')
             if not step_metadata['success']:
                 path += '_ERROR'
             os.makedirs(path, exist_ok=True)
@@ -237,9 +237,6 @@ class Env:
         metrics = {}
         self.path_calculator.requested_start = agent_state.position
         metrics['distance_to_goal'] = self.simWrapper.get_path(self.path_calculator)
-        # current_position = agent_state.position
-        # goal_position = np.array(self.current_episode['object_positions'])
-        # metrics['distance_to_goal'] = np.min(np.linalg.norm(current_position - goal_position, axis=1))
         metrics['spl'] = 0
         metrics['goal_reached'] = False
         metrics['done'] = False
@@ -435,7 +432,7 @@ class WMNavEnv(Env):
         Called after the episode is complete, saves the dataframe log, and resets the environment.
         Sends a request to the aggregator server if parallel is set to True.
         """
-        self.df.to_pickle(f'logs/{self.outer_run_name}/{self.inner_run_name}/{self.curr_run_name}/df_results.pkl')
+        self.df.to_pickle(os.path.join(os.environ.get("LOG_DIR"), f'{self.outer_run_name}/{self.inner_run_name}/{self.curr_run_name}/df_results.pkl'))
         self.simWrapper.reset()
         self.agent.reset()
         if self.cfg['parallel']:
@@ -455,13 +452,13 @@ class WMNavEnv(Env):
         logging.info('\n===================RUN COMPLETE===================\n')
         if self.cfg['log_freq'] == 1:
             create_gif(
-                f'logs/{self.outer_run_name}/{self.inner_run_name}/{self.curr_run_name}', self.agent.cfg['sensor_cfg']['img_height'], self.agent.cfg['sensor_cfg']['img_width'], agent_cls=self.agent_cls
+                os.path.join(os.environ.get("LOG_DIR"), f'{self.outer_run_name}/{self.inner_run_name}/{self.curr_run_name}'), self.agent.cfg['sensor_cfg']['img_height'], self.agent.cfg['sensor_cfg']['img_width'], agent_cls=self.agent_cls
             )
             create_gif_nav(
-                    f'logs/{self.outer_run_name}/{self.inner_run_name}/{self.curr_run_name}',
+                    os.path.join(os.environ.get("LOG_DIR"), f'{self.outer_run_name}/{self.inner_run_name}/{self.curr_run_name}'),
                     1800, 1800
             )
             create_gif_cvalue(
-                f'logs/{self.outer_run_name}/{self.inner_run_name}/{self.curr_run_name}',
+                os.path.join(os.environ.get("LOG_DIR"), f'{self.outer_run_name}/{self.inner_run_name}/{self.curr_run_name}'),
                 1800, 1800
             )
