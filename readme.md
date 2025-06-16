@@ -1,6 +1,7 @@
 
 <h1 align="center">WMNav: Integrating Vision-Language Models into World Models for Object Goal Navigation</a>
 </h1>
+<p align="center"><strong>IROS 2025 Oral</strong></p>
 
 <h5 align="center">
 
@@ -16,7 +17,7 @@ Dujun Nie<sup>1,*</sup>, Xianda Guo<sup>2,*</sup>, Yiqun Duan<sup>3</sup>, Ruiju
 </div>
 
 <div align="center">
-This repository is the official implementation of WMNav, a novel World Model-based Object Goal Navigation framework powered by Vision-Language Models. 
+<strong>[IROS'25]</strong> This repository is the official implementation of WMNav, a novel World Model-based Object Goal Navigation framework powered by Vision-Language Models. 
 </div>
 
 <p align="center">
@@ -30,6 +31,7 @@ This project is based on <a href="https://github.com/Jirl-upenn/VLMnav">VLMnav</
 3. **Efficiency** - Proposing a subtask decomposition with feedback and a two-stage action proposer strategy to enhance the reliability of VLM reasoning outcomes and improve exploration efficiency.  
 
 ## 🔥 News
+* **` June. 16th, 2025`:** WMNav is accepted to IROS 2025 and selected as oral presentation.
 * **` June. 11th, 2025`:** WMNav NOW supports the open-source model Qwen2.5-VL!
 * **` Mar. 14th, 2025`:** The code of WMNav is available! ☕️
 * **` Mar. 4th, 2025`:** We released our paper on [Arxiv](https://arxiv.org/abs/2503.02247).
