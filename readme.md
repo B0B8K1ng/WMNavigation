@@ -31,7 +31,7 @@ This project is based on <a href="https://github.com/Jirl-upenn/VLMnav">VLMnav</
 3. **Efficiency** - Proposing a subtask decomposition with feedback and a two-stage action proposer strategy to enhance the reliability of VLM reasoning outcomes and improve exploration efficiency.  
 
 ## 🔥 News
-* **` June. 16th, 2025`:** WMNav is accepted to IROS 2025 and selected as oral presentation.
+* **` June. 16th, 2025`:** WMNav is accepted to IROS 2025 and selected as </strong>oral presentation</strong>.
 * **` June. 11th, 2025`:** WMNav NOW supports the open-source model Qwen2.5-VL!
 * **` Mar. 14th, 2025`:** The code of WMNav is available! ☕️
 * **` Mar. 4th, 2025`:** We released our paper on [Arxiv](https://arxiv.org/abs/2503.02247).
