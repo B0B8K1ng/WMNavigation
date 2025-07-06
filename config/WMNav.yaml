@@ -18,9 +18,9 @@ agent_cfg:
   navigability_height_threshold: 0.2 # threshold from the ground to consider navigable
   map_scale: 100 #pixels per meter
   vlm_cfg:
-    model_cls: QwenVLM
+    model_cls: GeminiVLM # [GeminiVLM, QwenVLM]
     model_kwargs:
-      model: Qwen/Qwen2.5-VL-7B-Instruct
+      model: gemini-2.0-flash # [gemini-1.5-flash, gemini-1.5-pro, gemini-2.0-flash, Qwen/Qwen2.5-VL-3B-Instruct, Qwen/Qwen2.5-VL-7B-Instruct]
   panoramic_padding: False
 
 sim_cfg:

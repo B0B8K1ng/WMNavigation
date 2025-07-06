@@ -110,8 +110,42 @@ Our code requires all above data to be in a data folder in the following format.
 ```
 The variable DATASET_ROOT can be set in [.env file](.env).
 
+Task datasets: [objectnav_hm3d_v0.1](https://dl.fbaipublicfiles.com/habitat/data/datasets/objectnav/hm3d/v1/objectnav_hm3d_v1.zip), [objectnav_hm3d_v0.2](https://dl.fbaipublicfiles.com/habitat/data/datasets/objectnav/hm3d/v2/objectnav_hm3d_v2.zip) and [objectnav_mp3d](https://dl.fbaipublicfiles.com/habitat/data/datasets/objectnav/m3d/v1/objectnav_mp3d_v1.zip)
+
 ### 🚩 API Key
+You can choose the VLM type in [YAML file](config/WMNav.yaml):
+```
+agent_cfg:
+  ...
+  vlm_cfg:
+    model_cls: GeminiVLM # [GeminiVLM, QwenVLM]
+    model_kwargs:
+      model: gemini-2.0-flash # [gemini-1.5-flash, gemini-1.5-pro, gemini-2.0-flash, Qwen/Qwen2.5-VL-3B-Instruct, Qwen/Qwen2.5-VL-7B-Instruct]
+```
+
+1. **Gemini**
 To use the Gemini VLMs, paste a base url and api key into the [.env file](.env) for the variable called GEMINI_BASE_URL and GEMINI_API_KEY.
+
+2. **Qwen**
+To use the Qwen VLMs, refer to [Qwen2.5-VL](https://github.com/QwenLM/Qwen2.5-VL). We use vLLM for fast Qwen2.5-VL deployment and inference. You need to install vllm>0.7.2 to enable Qwen2.5-VL support.
+    ```
+    pip install git+https://github.com/huggingface/transformers@f3f6c86582611976e72be054675e2bf0abb5f775
+    pip install accelerate
+    pip install qwen-vl-utils
+    pip install 'vllm>0.7.2'
+    ```
+    Run the command below to start an OpenAI-compatible API service:
+    ```
+    vllm serve Qwen/Qwen2.5-VL-7B-Instruct --port 8000 --host 0.0.0.0 --dtype bfloat16 --limit-mm-per-prompt image=5,video=5
+    ```
+
+    Then set the variables in the [.env file](.env) as following:
+    ```
+    GEMINI_BASE_URL= "http://localhost:8000/v1"
+    GEMINI_API_KEY= "EMPTY"
+    ```
+
+3. **Others**
 You can also try other VLMs by modifying [```api.py```](src/api.py)(using the OpenAI libraries)
 
 ##  🎮 Demo
